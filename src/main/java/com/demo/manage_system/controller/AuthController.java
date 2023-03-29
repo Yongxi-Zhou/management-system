@@ -9,12 +9,14 @@ import java.io.IOException;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sun.misc.BASE64Encoder;
 
 @RestController
+@Slf4j
 public class AuthController extends BaseController {
 
   @Autowired
@@ -34,7 +36,7 @@ public class AuthController extends BaseController {
     String str = "data:image/jpeg;base64," + encoder.encode(outputStream.toByteArray());
 
     redisUtil.hset(Const.CAPTCHA_KEY, key, code, 120);
-
+    log.info("验证码 -- {} - {}", key, code);
 //    返回key和验证码图片
     return Result.succ(
         MapUtil.builder().put("token", key).put("captchaImg", str).build()
