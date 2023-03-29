@@ -1,6 +1,7 @@
 package com.demo.manage_system.config;
 
-//import com.manage_system.security.*;
+import com.demo.manage_system.security.*;
+import com.demo.manage_system.security.LoginFailureHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,10 +18,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-	/**
 	@Autowired
 	LoginFailureHandler loginFailureHandler;
+
+	@Autowired
+	LoginSuccessHandler loginSuccessHandler;
+
+	/**
 
 	@Autowired
 	LoginSuccessHandler loginSuccessHandler;
@@ -67,8 +71,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 				// 登录配置
 				.formLogin()
-//				.successHandler(loginSuccessHandler)
-//				.failureHandler(loginFailureHandler)
+				.successHandler(loginSuccessHandler)
+				.failureHandler(loginFailureHandler)
 
 //				.and()
 //				.logout()
