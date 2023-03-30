@@ -24,13 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	LoginSuccessHandler loginSuccessHandler;
 
-	/**
-
-	@Autowired
-	LoginSuccessHandler loginSuccessHandler;
-
 	@Autowired
 	CaptchaFilter captchaFilter;
+	/**
 
 	@Autowired
 	JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -96,9 +92,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //				.accessDeniedHandler(jwtAccessDeniedHandler)
 
 				// 配置自定义的过滤器
-//				.and()
+				.and()
 //				.addFilter(jwtAuthenticationFilter())
-//				.addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)
 
 		;
 
