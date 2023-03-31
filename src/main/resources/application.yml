@@ -14,3 +14,9 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
+
+system:
+  jwt:
+    header: Authorization
+    expire: 604800
+    secret: aosjdojansdon123o123n23o4no23422

@@ -26,7 +26,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	CaptchaFilter captchaFilter;
-	/**
+
+	@Bean
+	JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
+		JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager());
+		return jwtAuthenticationFilter;
+	}
+
 
 	@Autowired
 	JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -34,17 +40,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
+	/**
 	@Autowired
 	UserDetailServiceImpl userDetailService;
 
 	@Autowired
 	JwtLogoutSuccessHandler jwtLogoutSuccessHandler;
 
-	@Bean
-	JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
-		JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager());
-		return jwtAuthenticationFilter;
-	}
 
 	@Bean
 	BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -86,14 +88,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated()
 
 				// 异常处理器
-//				.and()
-//				.exceptionHandling()
-//				.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//				.accessDeniedHandler(jwtAccessDeniedHandler)
+				.and()
+				.exceptionHandling()
+				.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+				.accessDeniedHandler(jwtAccessDeniedHandler)
 
 				// 配置自定义的过滤器
 				.and()
-//				.addFilter(jwtAuthenticationFilter())
+				.addFilter(jwtAuthenticationFilter())
 				.addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)
 
 		;

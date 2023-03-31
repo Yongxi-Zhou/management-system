@@ -28,6 +28,9 @@ public class AuthController extends BaseController {
 //    生成验证码
     String code = producer.createText();
 
+    key = "aaaaaa";
+    code = "11111";
+
     BufferedImage image = producer.createImage(code);
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     ImageIO.write(image, "jpg", outputStream);

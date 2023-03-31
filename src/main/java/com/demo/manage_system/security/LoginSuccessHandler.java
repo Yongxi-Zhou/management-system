@@ -3,6 +3,7 @@ package com.demo.manage_system.security;
 import cn.hutool.json.JSONUtil;
 
 import com.demo.manage_system.common.lang.Result;
+import com.demo.manage_system.util.JwtUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -16,8 +17,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
-//	@Autowired
-//	JwtUtils jwtUtils;
+	@Autowired
+	JwtUtils jwtUtils;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -25,8 +26,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		ServletOutputStream outputStream = response.getOutputStream();
 
 		// 生成jwt，并放置到请求头中
-//		String jwt = jwtUtils.generateToken(authentication.getName());
-//		response.setHeader(jwtUtils.getHeader(), jwt);
+		String jwt = jwtUtils.generateToken(authentication.getName());
+		response.setHeader(jwtUtils.getHeader(), jwt);
 
 		Result result = Result.succ("????");
 
