@@ -22,7 +22,7 @@ public class LoginFailureHandler implements
     httpServletResponse.setContentType("application/json;charset=UTF-8");
     ServletOutputStream outputStream = httpServletResponse.getOutputStream();
 
-    Result result = Result.fail(e.getMessage());
+    Result result = Result.fail("用户名或者密码错误");
 
     outputStream.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
     outputStream.flush();

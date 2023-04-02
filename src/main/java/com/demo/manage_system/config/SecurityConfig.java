@@ -40,18 +40,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-	/**
-	@Autowired
-	UserDetailServiceImpl userDetailService;
-
-	@Autowired
-	JwtLogoutSuccessHandler jwtLogoutSuccessHandler;
-
-
+//	定义密码丢加密形式
 	@Bean
 	BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
+	@Autowired
+	UserDetailServiceImpl userDetailService;
+
+	/**
+	@Autowired
+	JwtLogoutSuccessHandler jwtLogoutSuccessHandler;
+
 	**/
 	private static final String[] URL_WHITELIST = {
 
@@ -97,13 +98,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.addFilter(jwtAuthenticationFilter())
 				.addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)
-
 		;
 
 	}
 
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.userDetailsService(userDetailService);
-//	}
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailService);
+	}
 }
