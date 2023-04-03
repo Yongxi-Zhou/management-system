@@ -23,4 +23,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
    * @return
    */
   List<Long> getNavMenuIds(Long userId);
+
+  List<SysUser> listByMenuId(Long menuId);
 }
