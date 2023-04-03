@@ -22,11 +22,11 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 	@Autowired
 	JwtUtils jwtUtils;
 
-//	@Autowired
-//	UserDetailServiceImpl userDetailService;
-//
-//	@Autowired
-//	SysUserService sysUserService;
+	@Autowired
+	UserDetailServiceImpl userDetailService;
+
+	@Autowired
+	SysUserService sysUserService;
 
 	public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
 		super(authenticationManager);
@@ -52,9 +52,9 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 		String username = claim.getSubject();
 		// 获取用户的权限等信息
 
-//		SysUser sysUser = sysUserService.getByUsername(username);
+		SysUser sysUser = sysUserService.getByUsername(username);
 		UsernamePasswordAuthenticationToken token
-				= new UsernamePasswordAuthenticationToken(username, null, null);
+				= new UsernamePasswordAuthenticationToken(username, null, userDetailService.getUserAuthority(sysUser.getId()));
 
 		// 通过jwt完成用户登陆
 		SecurityContextHolder.getContext().setAuthentication(token);

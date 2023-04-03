@@ -102,6 +102,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	}
 
+//	配置了一个身份验证管理器，使用AuthenticationManagerBuilder组件创建。我们将CustomUserDetailsService设置为用户详细信息服务，并指定密码编码器。
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailService);
