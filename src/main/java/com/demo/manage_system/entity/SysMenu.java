@@ -2,6 +2,8 @@ package com.demo.manage_system.entity;
 
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -52,7 +54,8 @@ public class SysMenu extends BaseEntity {
      * 排序
      */
     @TableField("orderNum")
-    private Integer ordernum;
+    private Integer orderNum;
 
-
+    @TableField(exist = false)
+    private List<SysMenu> children = new ArrayList<>();
 }

@@ -2,10 +2,12 @@ package com.demo.manage_system.controller;
 import cn.hutool.core.map.MapUtil;
 import com.demo.manage_system.common.lang.Const;
 import com.demo.manage_system.common.lang.Result;
+import com.demo.manage_system.entity.SysUser;
 import com.google.code.kaptcha.Producer;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -43,6 +45,25 @@ public class AuthController extends BaseController {
 //    返回key和验证码图片
     return Result.succ(
         MapUtil.builder().put("token", key).put("captchaImg", str).build()
+    );
+  }
+
+  /**
+   * 获取用户信息接口
+   * @param principal
+   * @return
+   */
+  @GetMapping("/sys/userInfo")
+  public Result userInfo(Principal principal) {
+
+    SysUser sysUser = sysUserService.getByUsername(principal.getName());
+
+    return Result.succ(MapUtil.builder()
+        .put("id", sysUser.getId())
+        .put("username", sysUser.getUsername())
+        .put("avatar", sysUser.getAvatar())
+        .put("created", sysUser.getCreated())
+        .map()
     );
   }
 

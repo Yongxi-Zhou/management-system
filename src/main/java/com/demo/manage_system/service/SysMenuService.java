@@ -1,7 +1,9 @@
 package com.demo.manage_system.service;
 
+import com.demo.manage_system.common.dto.SysMenuDto;
 import com.demo.manage_system.entity.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SysMenuService extends IService<SysMenu> {
 
+  List<SysMenuDto> getCurrentUserNav();
 }
