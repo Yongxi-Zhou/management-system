@@ -4,6 +4,8 @@ package com.demo.manage_system.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -24,8 +26,10 @@ public class SysMenu extends BaseEntity {
     /**
      * 父菜单ID，一级菜单为0
      */
+    @NotNull(message = "父菜单不能为空")
     private Long parentId;
 
+    @NotBlank(message = "菜单名称不能为空")
     private String name;
 
     /**
@@ -36,6 +40,7 @@ public class SysMenu extends BaseEntity {
     /**
      * 授权(多个用逗号分隔，如：user:list,user:create)
      */
+    @NotBlank(message = "授权码不能为空")
     private String perms;
 
     private String component;

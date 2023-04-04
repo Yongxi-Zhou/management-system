@@ -1,6 +1,7 @@
 package com.demo.manage_system.service.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.demo.manage_system.common.dto.SysMenuDto;
 import com.demo.manage_system.entity.SysMenu;
 import com.demo.manage_system.entity.SysUser;
@@ -46,6 +47,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
     // 实体转DTO
     return convert(menuTree);
+  }
+
+  @Override
+  public List<SysMenu> tree() {
+    List<SysMenu> sysMenus = this.list(new QueryWrapper<SysMenu>().orderByAsc("orderNum"));
+    return buildTreeMenu(sysMenus);
   }
 
   private List<SysMenuDto> convert(List<SysMenu> menuTree) {
