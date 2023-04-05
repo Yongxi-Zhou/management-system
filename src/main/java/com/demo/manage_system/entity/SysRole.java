@@ -1,6 +1,10 @@
 package com.demo.manage_system.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.util.ArrayList;
+import java.util.List;
+import javax.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -18,8 +22,10 @@ public class SysRole extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
+    @NotBlank(message = "角色名称不能为空")
     private String name;
 
+    @NotBlank(message = "角色描述不能为空")
     private String code;
 
     /**
@@ -27,5 +33,6 @@ public class SysRole extends BaseEntity {
      */
     private String remark;
 
-
+    @TableField(exist = false)
+    private List<Long> menuIds = new ArrayList<>();
 }
