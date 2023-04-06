@@ -35,7 +35,7 @@ public class BaseController {
   SysRoleMenuService sysRoleMenuService;
 
   public Page getPage() {
-    int current = ServletRequestUtils.getIntParameter(req, "cuurent", 1);
+    int current = ServletRequestUtils.getIntParameter(req, "current", 1);
     int size = ServletRequestUtils.getIntParameter(req, "size", 10);
     return new Page(current, size);
   }
